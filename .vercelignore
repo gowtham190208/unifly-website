@@ -1,0 +1,2 @@
+# Ignore files exceeding Vercel 50MB single-file limit
+assets/downloads/*.apk

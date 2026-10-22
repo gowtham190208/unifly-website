@@ -1,0 +1,6 @@
+.vercel
+node_modules/
+.DS_Store
+Thumbs.db
+assets/downloads/*.apk
+assets/downloads/
