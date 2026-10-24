@@ -2135,12 +2135,13 @@ h1, h2, h3, h4, h5, h6 {
 .live-card-download-metric {
   display: inline-flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
   background: #FFFFFF;
   border: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: var(--radius-full);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 700;
   color: #065F46;
   margin-bottom: 16px;
@@ -2148,8 +2149,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .live-card-download-metric strong {
-  font-size: 0.96rem;
+  font-size: 1rem;
   color: #047857;
+  font-weight: 800;
+}
+
+.metric-delivery-sub {
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #6B7280;
+  margin-left: 2px;
 }
 
 /* Download Button Counter Chip */
@@ -2165,6 +2174,205 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 999px;
   margin-left: 6px;
   letter-spacing: 0.02em;
+}
+
+/* Counter Shimmer Loading State */
+.counter-shimmer {
+  display: inline-block;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: #9CA3AF;
+  animation: pulseOpacity 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseOpacity {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Account Sign-In Button & Auth Badge */
+.btn-outline-account {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: rgba(255, 121, 0, 0.08);
+  border: 1px solid rgba(255, 121, 0, 0.3);
+  padding: 7px 14px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-outline-account:hover {
+  background: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.user-auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #065F46;
+}
+
+.auth-user-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+.auth-user-name {
+  max-width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-auth-logout {
+  background: none;
+  border: none;
+  color: #EF4444;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.btn-auth-logout:hover {
+  background: #FEE2E2;
+}
+
+/* Account Modal */
+.auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 10001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.auth-modal-overlay.open {
+  display: flex;
+}
+
+.auth-modal-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-xl);
+  max-width: 480px;
+  width: 100%;
+  padding: 28px 24px;
+  box-shadow: var(--shadow-xl), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  position: relative;
+  animation: modalScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #F3F4F6;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #6B7280;
+  font-size: 1.1rem;
+}
+
+.modal-close-btn:hover {
+  background: #E5E7EB;
+  color: #111827;
+}
+
+.auth-modal-header {
+  margin-bottom: 20px;
+}
+
+.auth-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+
+.auth-modal-subtitle {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+.auth-form-group {
+  margin-bottom: 14px;
+}
+
+.auth-form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+
+.auth-form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  font-family: var(--font-sans);
+  background: #F9FAFB;
+}
+
+.auth-form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(255, 121, 0, 0.15);
+}
+
+.auth-modal-info-box {
+  background: #FFF7ED;
+  border: 1px solid #FFEDD5;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 0.8rem;
+  color: #9A3412;
+  margin-bottom: 18px;
+  line-height: 1.45;
+}
+
+.demo-account-action {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 /* Interactive Download Toast Notification */
@@ -2256,6 +2464,10 @@ h1, h2, h3, h4, h5, h6 {
     right: 16px;
     bottom: 16px;
     max-width: none;
+  }
+  .btn-outline-account {
+    padding: 5px 10px;
+    font-size: 0.75rem;
   }
 }
 

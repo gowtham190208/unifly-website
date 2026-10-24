@@ -63,6 +63,17 @@
 
       <!-- Header Action Buttons -->
       <div class="header-actions">
+        <!-- Authenticated User Account Indicator -->
+        <div class="user-auth-badge" id="userAuthBadge" style="display: none;">
+          <span class="auth-user-dot" aria-hidden="true"></span>
+          <span class="auth-user-name" id="authUserName">User</span>
+          <button type="button" class="btn-auth-logout" id="authLogoutBtn" title="Sign out to test unauthenticated download">Sign Out</button>
+        </div>
+        <button type="button" class="btn-outline-account" id="accountModalTriggerBtn" aria-label="Sign In or Test Account Tracking">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          <span id="accountBtnText">Sign In (Account Tracking)</span>
+        </button>
+
         <a href="#downloads" class="btn btn-primary header-cta-btn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
@@ -154,20 +165,20 @@
           <!-- Real-Time Verified App Download Counter -->
           <div class="hero-counter-strip" id="heroCounterStrip" role="region" aria-label="Real-time Application Download Counter">
             <div class="counter-pill-main">
-              <span class="live-pulse-dot" aria-hidden="true"></span>
-              <span class="counter-label">Live Verified Downloads:</span>
-              <span class="counter-value-highlight" id="heroTotalDownloads">1,248</span>
-              <span class="counter-badge-tag">Real-Time</span>
+              <span class="live-pulse-dot" id="liveSyncStatusDot" aria-hidden="true"></span>
+              <span class="counter-label" id="counterSyncLabel">Total Unique Downloads:</span>
+              <span class="counter-value-highlight" id="heroTotalDownloads"><span class="counter-shimmer">Connecting...</span></span>
+              <span class="counter-badge-tag" id="liveSyncStatusBadge">Connecting...</span>
             </div>
             <div class="counter-sub-metrics">
-              <div class="sub-metric-item" id="heroAndroidSubStat">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.61 15.15c-.41 0-.74-.33-.74-.74 0-.41.33-.74.74-.74.41 0 .74.33.74.74 0 .41-.33.74-.74.74zm-9.22 0c-.41 0-.74-.33-.74-.74 0-.41.33-.74.74-.74.41 0 .74.33.74.74 0 .41-.33.74-.74.74zm9.46-5.59l1.8-3.12a.39.39 0 00-.14-.54.39.39 0 00-.54.14l-1.83 3.17c-1.24-.56-2.65-.87-4.14-.87-1.49 0-2.9.31-4.14.87L5.99 5.89a.39.39 0 00-.54-.14.39.39 0 00-.14.54l1.8 3.12C3.78 11.23 1.5 14.6 1.5 18.5h21c0-3.9-2.28-7.27-5.65-8.94z"/></svg>
-                <span>Android: <strong id="heroAndroidCount">780</strong></span>
+              <div class="sub-metric-item" id="heroWindowsSubStat" title="Unique registered Windows user downloads">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                <span>Windows: <strong id="heroWindowsCount">--</strong> unique</span>
               </div>
               <span class="metric-separator" aria-hidden="true">•</span>
-              <div class="sub-metric-item" id="heroWindowsSubStat">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-                <span>Windows PC: <strong id="heroWindowsCount">468</strong></span>
+              <div class="sub-metric-item" id="heroAndroidSubStat" title="Unique registered Android user downloads">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.61 15.15c-.41 0-.74-.33-.74-.74 0-.41.33-.74.74-.74.41 0 .74.33.74.74 0 .41-.33.74-.74.74zm-9.22 0c-.41 0-.74-.33-.74-.74 0-.41.33-.74.74-.74.41 0 .74.33.74.74 0 .41-.33.74-.74.74zm9.46-5.59l1.8-3.12a.39.39 0 00-.14-.54.39.39 0 00-.54.14l-1.83 3.17c-1.24-.56-2.65-.87-4.14-.87-1.49 0-2.9.31-4.14.87L5.99 5.89a.39.39 0 00-.54-.14.39.39 0 00-.14.54l1.8 3.12C3.78 11.23 1.5 14.6 1.5 18.5h21c0-3.9-2.28-7.27-5.65-8.94z"/></svg>
+                <span>Android: <strong id="heroAndroidCount">--</strong> unique</span>
               </div>
             </div>
           </div>
@@ -563,7 +574,8 @@
               <!-- Live Download Metric Pill -->
               <div class="live-card-download-metric">
                 <span class="live-pulse-dot" aria-hidden="true"></span>
-                <span>Verified Downloads: <strong id="androidCardDownloads">780</strong></span>
+                <span>Android: <strong id="androidCardDownloads">--</strong> unique downloads</span>
+                <span class="metric-delivery-sub" id="androidDeliveriesNote">(<span id="androidTotalDeliveries">--</span> total deliveries)</span>
               </div>
 
               <h3 class="download-heading">Take Your Shop Everywhere</h3>
@@ -588,12 +600,12 @@
 
               <!-- Android Download Action Group -->
               <div class="download-action-group">
-                <a href="https://github.com/gowtham190208/unifly-website/releases/download/v1.2.0/Unifly-Shop-Management-Android.apk" class="btn btn-primary btn-lg" download="Unifly-Shop-Management-Android.apk" id="androidDownloadBtn" data-platform="android">
+                <a href="https://shop-management-billing-app.onrender.com/api/v1/downloads/file/android" class="btn btn-primary btn-lg" id="androidDownloadBtn" data-platform="android">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
                   </svg>
                   <span>Download for Android (v1.2.0 APK)</span>
-                  <span class="btn-count-chip" id="androidBtnCount">780 dl</span>
+                  <span class="btn-count-chip" id="androidBtnCount">-- unique</span>
                 </a>
               </div>
 
@@ -645,7 +657,8 @@
               <!-- Live Download Metric Pill -->
               <div class="live-card-download-metric">
                 <span class="live-pulse-dot" aria-hidden="true"></span>
-                <span>Verified Downloads: <strong id="windowsCardDownloads">468</strong></span>
+                <span>Windows: <strong id="windowsCardDownloads">--</strong> unique downloads</span>
+                <span class="metric-delivery-sub" id="windowsDeliveriesNote">(<span id="windowsTotalDeliveries">--</span> total deliveries)</span>
               </div>
 
               <h3 class="download-heading">Powerful Shop Management on Your PC</h3>
@@ -670,12 +683,12 @@
 
               <!-- Windows Download Action Group -->
               <div class="download-action-group">
-                <a href="https://github.com/gowtham190208/unifly-website/releases/download/v1.2.0/Unifly-Setup.exe" class="btn btn-primary btn-lg" download="Unifly-Setup.exe" id="windowsDownloadBtn" data-platform="windows">
+                <a href="https://shop-management-billing-app.onrender.com/api/v1/downloads/file/windows" class="btn btn-primary btn-lg" id="windowsDownloadBtn" data-platform="windows">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
                   </svg>
                   <span>Download for Windows (v1.2.0 Setup .exe)</span>
-                  <span class="btn-count-chip" id="windowsBtnCount">468 dl</span>
+                  <span class="btn-count-chip" id="windowsBtnCount">-- unique</span>
                 </a>
               </div>
 
@@ -1042,6 +1055,61 @@
       </div>
     </div>
   </footer>
+
+  <!-- Account Authentication & Duplicate Prevention Verification Modal -->
+  <div class="auth-modal-overlay" id="authModal" aria-hidden="true" role="dialog" aria-labelledby="authModalTitle">
+    <div class="auth-modal-card">
+      <button type="button" class="modal-close-btn" id="closeAuthModalBtn" aria-label="Close Modal">&times;</button>
+      <div class="auth-modal-header">
+        <h3 class="auth-modal-title" id="authModalTitle">Unifly Account Verification</h3>
+        <p class="auth-modal-subtitle">
+          Unique download counter enforcement: Each registered user account is counted strictly <strong>once</strong> per application platform (Windows or Android).
+        </p>
+      </div>
+
+      <!-- Logged In State Display -->
+      <div id="modalLoggedInView" style="display: none;">
+        <div class="auth-modal-info-box" style="background: #F0FDF4; border-color: #BBF7D0; color: #166534;">
+          <strong>Signed in as:</strong> <span id="modalUserEmail">user@example.com</span><br>
+          <strong>Account ID:</strong> <span id="modalUserId">#1</span> • <strong>Role:</strong> <span id="modalUserRole">seller</span><br>
+          <span style="font-size: 0.78rem; display: block; margin-top: 4px; color: #15803D;">
+            Any download you trigger will be uniquely linked to your Account ID. Duplicate downloads will not inflate the counter.
+          </span>
+        </div>
+        <button type="button" class="btn btn-secondary" id="modalSignOutBtn" style="width: 100%;">Sign Out of Account</button>
+      </div>
+
+      <!-- Logged Out Sign In Form -->
+      <form id="authLoginForm" autocomplete="on">
+        <div class="auth-modal-info-box">
+          <strong>Database-Level Duplicate Prevention:</strong>
+          Sign in with your shop account to record your download as a unique account. Even if you download 5 times, your account only increments the counter once!
+        </div>
+
+        <div class="auth-form-group">
+          <label for="authEmailInput">Account Email</label>
+          <input type="email" id="authEmailInput" placeholder="seller@unifly.com" required autocomplete="username">
+        </div>
+
+        <div class="auth-form-group">
+          <label for="authPasswordInput">Password</label>
+          <input type="password" id="authPasswordInput" placeholder="Enter your password" required autocomplete="current-password">
+        </div>
+
+        <div id="authErrorMessage" style="display: none; color: #DC2626; font-size: 0.82rem; margin-bottom: 12px; font-weight: 600;"></div>
+
+        <button type="submit" class="btn btn-primary" id="loginSubmitBtn" style="width: 100%; justify-content: center;">
+          <span>Sign In to Account</span>
+        </button>
+
+        <div class="demo-account-action">
+          <button type="button" class="btn btn-secondary" id="fillDemoAdminBtn" style="flex: 1; font-size: 0.78rem; padding: 8px 10px;">
+            ⚡ Quick Test Account
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <!-- Interactive Real-Time Download Feedback Toast -->
   <div class="download-toast" id="downloadToast" role="status" aria-live="polite">
