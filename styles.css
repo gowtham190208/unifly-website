@@ -780,7 +780,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 28px;
 }
 
@@ -1686,6 +1686,10 @@ h1, h2, h3, h4, h5, h6 {
   :root {
     --header-height: 68px;
   }
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
   .brand-logo-img {
     height: 36px;
   }
@@ -1694,7 +1698,7 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 44px;
   }
   .hero-headline {
-    font-size: 1.9rem;
+    font-size: clamp(1.85rem, 7.5vw, 2.2rem);
     line-height: 1.2;
   }
   .hero-subtext {
@@ -1711,13 +1715,33 @@ h1, h2, h3, h4, h5, h6 {
   .feature-card,
   .contact-info-card,
   .contact-form-wrapper,
-  .value-card {
-    padding: 24px 18px;
+  .value-card,
+  .step-card {
+    padding: 22px 16px;
+  }
+  .download-showcase-card,
+  .download-showcase-card.reverse-grid {
+    padding: 22px 16px;
+  }
+  .release-changelog-card {
+    padding: 20px 16px;
+  }
+  .package-specs {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
   .mockup-frame.mode-mobile {
-    max-width: 310px;
+    max-width: min(320px, 92vw);
     border-radius: 32px;
     padding: 8px 6px 14px;
+  }
+  .btn {
+    padding: 11px 18px;
+    font-size: 0.92rem;
+  }
+  .btn-lg {
+    padding: 13px 20px;
+    font-size: 0.96rem;
   }
 }
 
@@ -1949,6 +1973,292 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--color-primary-light);
   border-color: var(--color-primary);
 }
+
+/* ==========================================================================
+   15. Real-Time Download Counter System & Responsive Adaptation
+   ========================================================================== */
+
+/* Hero Real-Time Download Counter Strip */
+.hero-counter-strip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  background: #FFFFFF;
+  border: 1.5px solid rgba(255, 121, 0, 0.22);
+  border-radius: var(--radius-full);
+  padding: 8px 20px;
+  margin: 0 auto 36px;
+  box-shadow: 0 4px 18px rgba(255, 121, 0, 0.1), var(--shadow-xs);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+  max-width: 100%;
+}
+
+.hero-counter-strip:hover {
+  border-color: rgba(255, 121, 0, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 121, 0, 0.16);
+}
+
+.counter-pill-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.live-pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: livePulse 2s infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+@keyframes livePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.counter-label {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.counter-value-highlight {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-primary-hover);
+  letter-spacing: -0.02em;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-block;
+}
+
+.counter-value-highlight.number-bump,
+.counter-number.number-bump,
+.btn-count-chip.number-bump {
+  animation: numberBump 0.45s ease-out;
+}
+
+@keyframes numberBump {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.32);
+    color: #10B981;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.counter-badge-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: #DCFCE7;
+  color: #15803D;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid rgba(22, 163, 74, 0.25);
+}
+
+.counter-sub-metrics {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.86rem;
+  color: var(--color-text-secondary);
+  border-left: 1.5px solid var(--color-border);
+  padding-left: 14px;
+}
+
+.sub-metric-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sub-metric-item strong {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.metric-separator {
+  color: var(--color-border);
+  font-weight: bold;
+}
+
+/* Auto-Adapt Indicator in Hero Showcase */
+.auto-adapt-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 121, 0, 0.2);
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  box-shadow: var(--shadow-xs);
+  margin-bottom: 12px;
+  transition: all var(--transition-fast);
+}
+
+.auto-adapt-indicator .adapt-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  display: inline-block;
+  animation: livePulse 2s infinite;
+}
+
+/* Card Download Counter Pill */
+.live-card-download-metric {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFFFFF;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #065F46;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);
+}
+
+.live-card-download-metric strong {
+  font-size: 0.96rem;
+  color: #047857;
+}
+
+/* Download Button Counter Chip */
+.btn-count-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-left: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* Interactive Download Toast Notification */
+.download-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #18191C;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 121, 0, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 121, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+  pointer-events: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 420px;
+}
+
+.download-toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.toast-icon {
+  font-size: 26px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.toast-body {
+  flex: 1;
+}
+
+.toast-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 2px;
+}
+
+.toast-message {
+  font-size: 0.82rem;
+  color: #9CA3AF;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.toast-badge-bump {
+  background: #10B981;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  animation: numberBump 0.5s ease-out;
+}
+
+/* Responsive refinements for the counter & mobile screens */
+@media (max-width: 768px) {
+  .hero-counter-strip {
+    flex-direction: column;
+    padding: 12px 18px;
+    border-radius: var(--radius-lg);
+    gap: 8px;
+    width: 100%;
+  }
+  .counter-sub-metrics {
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+    padding-left: 0;
+    padding-top: 8px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .download-toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+  }
+}
+
 
 
 
